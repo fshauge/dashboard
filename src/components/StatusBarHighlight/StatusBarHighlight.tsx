@@ -8,10 +8,10 @@ const clamp = (value: number, min: number, max: number) =>
 
 const map = (
   value: number,
-  min1: number, //a1
-  max1: number, //a2
-  min2: number, //b1
-  max2: number //b2
+  min1: number,
+  max1: number,
+  min2: number,
+  max2: number
 ) => min2 + ((value - min1) * (max2 - min2)) / (max1 - min1);
 
 const StatusBarHighlight = () => {
