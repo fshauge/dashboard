@@ -4,7 +4,7 @@ import styles from "./App.module.scss";
 
 const App = () => (
   <div className={styles.grid}>
-    <div className={styles["status-overlay-container"]} />
+    <div className={styles["status-overlay"]} />
     <div className={styles["dashboard-container"]}>
       <Dashboard />
     </div>
