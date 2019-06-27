@@ -6,10 +6,11 @@ import styles from "./styles.module.scss";
 
 const App = () => {
   const scroll = useScroll();
+  const opacity = Math.max(0, Math.min(1, scroll / 100));
 
   return (
     <div className={styles.container}>
-      <StatusBarHighlight opacity={scroll / 100} />
+      <StatusBarHighlight opacity={opacity} />
       <Dashboard />
     </div>
   );
