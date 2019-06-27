@@ -3,13 +3,15 @@
   --foreground: #222;
   --card-background: #f2f2f2;
   --card-shadow: 0 0 1rem hsla(0, 0%, 0%, 0.1);
-  --status-bar-highlight-background: hsla(0, 0%, 0%, 0.5);
+  --status-bar-highlight-start: 0.25;
+  --status-bar-highlight-end: 0.5;
 
   @media (prefers-color-scheme: dark) {
     --background: #111;
     --foreground: #ddd;
     --card-background: #181818;
     --card-shadow: 0 0 1rem hsla(0, 0%, 0%, 0.5);
-    --status-bar-highlight-background: hsla(0, 0%, 0%, 0.75);
+    --status-bar-highlight-start: 0;
+    --status-bar-highlight-end: 0.75;
   }
 }
