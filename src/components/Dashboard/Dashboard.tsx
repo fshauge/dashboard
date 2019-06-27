@@ -1,20 +1,9 @@
 import React from "react";
-import styled from "styled-components";
-import Card from "./Card";
-
-const Grid = styled.main`
-  flex: 1;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: min-content;
-  flex-direction: column;
-  justify-items: center;
-  gap: 2rem;
-  padding: 2rem;
-`;
+import Card from "../Card";
+import styles from "./Dashboard.module.scss";
 
 const Dashboard = () => (
-  <Grid>
+  <div className={styles.grid}>
     <Card>
       <h2>Card</h2>
       <p>
@@ -42,7 +31,7 @@ const Dashboard = () => (
         maiores amet?
       </p>
     </Card>
-  </Grid>
+  </div>
 );
 
 export default Dashboard;
