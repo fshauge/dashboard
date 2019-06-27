@@ -1,4 +1,5 @@
 import React from "react";
+import Helmet from "react-helmet";
 import useMedia from "use-media";
 
 const ThemeColor = () => {
@@ -7,7 +8,11 @@ const ThemeColor = () => {
     .getPropertyValue("--background")
     .trim();
 
-  return <meta name="theme-color" content={value} />;
+  return (
+    <Helmet>
+      <meta name="theme-color" content={value} />
+    </Helmet>
+  );
 };
 
 export default ThemeColor;
