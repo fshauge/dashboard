@@ -1,25 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import useScroll from "../../hooks/useScroll";
 import Dashboard from "../Dashboard";
-import styles from "./App.module.scss";
+import StatusBarHighlight from "../StatusBarHighlight";
+import styles from "./styles.module.scss";
 
 const App = () => {
-  const [opacity, setOpacity] = useState(0);
-
-  const handleScroll = () => {
-    setOpacity(document.documentElement.scrollTop / 100);
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  });
+  const scroll = useScroll();
 
   return (
     <div className={styles.container}>
-      <div style={{ opacity }} className={styles.statusOverlay} />
+      <StatusBarHighlight opacity={scroll / 100} />
       <Dashboard />
     </div>
   );

@@ -4,12 +4,3 @@
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
 }
-
-.statusOverlay {
-  position: fixed;
-  width: 100%;
-  height: env(safe-area-inset-top);
-  top: 0;
-  left: 0;
-  background: hsla(0, 0%, 0%, 0.75);
-}

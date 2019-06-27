@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "../Card";
-import styles from "./Dashboard.module.scss";
+import styles from "./styles.module.scss";
 
 const Dashboard = () => {
   return (
