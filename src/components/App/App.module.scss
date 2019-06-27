@@ -4,3 +4,24 @@
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
 }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+}
+
+.status-overlay-container {
+  padding-top: env(safe-area-inset-top);
+  background: hsla(0, 0%, 0%, 0.25);
+  grid-column: 1;
+  grid-row: 1 / 2;
+  z-index: 1;
+}
+
+.dashboard-container {
+  padding-top: env(safe-area-inset-top);
+  overflow-y: scroll;
+  grid-column: 1;
+  grid-row: 1 / 3;
+}
