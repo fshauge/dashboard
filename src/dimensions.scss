@@ -1,0 +1,14 @@
+:root {
+  --gutter-size: 1rem;
+  --grid-columns: 1;
+
+  @media screen and (min-width: 768px) {
+    --gutter-size: 1.5rem;
+    --grid-columns: 2;
+  }
+
+  @media screen and (min-width: 1366px) {
+    --gutter-size: 1.5rem;
+    --grid-columns: 3;
+  }
+}
