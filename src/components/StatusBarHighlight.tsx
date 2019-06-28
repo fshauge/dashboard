@@ -9,7 +9,8 @@ const Highlight = styled.div<{ opacity: number }>`
   left: 0;
   width: 100%;
   height: env(safe-area-inset-top);
-  background: hsla(0, 0%, 0%, ${props => props.opacity});
+  background: black;
+  opacity: ${props => props.opacity};
 `;
 
 const StatusBarHighlight: FC = () => {
