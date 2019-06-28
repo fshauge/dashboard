@@ -1,20 +1,32 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import { register } from "../serviceWorker";
 import Main from "./Main";
 
 const App: FC = () => {
   const [updated, setUpdated] = useState(false);
+  const skipWaitingRef = useRef<VoidFunction>();
 
   useEffect(() => {
     register({
-      onUpdate: () => {
+      onUpdate: registration => {
         setUpdated(true);
+        const waitingServiceWorker = registration.waiting!;
+
+        skipWaitingRef.current = () => {
+          waitingServiceWorker.postMessage({ type: "SKIP_WAITING" });
+        };
+
+        waitingServiceWorker.addEventListener("statechange", (event: any) => {
+          if (event.target!.state === "activated") {
+            window.location.reload();
+          }
+        });
       }
     });
   });
 
   const handleClick = () => {
-    navigator.serviceWorker.controller!.postMessage({ type: "SKIP_WAITING" });
+    skipWaitingRef.current!();
     window.location.reload();
   };
 
