@@ -1,11 +1,15 @@
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 import Helmet from "react-helmet";
-import { StyledProps, withTheme } from "styled-components";
+import { ThemeContext } from "styled-components";
 
-const ThemeColor: FC<StyledProps<{}>> = ({ theme }) => (
-  <Helmet>
-    <meta name="theme-color" content={theme.background} />
-  </Helmet>
-);
+const ThemeColor: FC = () => {
+  const { background } = useContext(ThemeContext);
 
-export default withTheme(ThemeColor);
+  return (
+    <Helmet>
+      <meta name="theme-color" content={background} />
+    </Helmet>
+  );
+};
+
+export default ThemeColor;
