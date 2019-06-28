@@ -153,3 +153,22 @@ export function waiting(): Promise<ServiceWorker | null> {
     }
   });
 }
+
+export function skipWaiting(
+  waiting: ServiceWorker | null,
+  onComplete: () => void
+) {
+  if (waiting !== null) {
+    waiting.addEventListener(
+      "statechange",
+      (event: any) => {
+        if (event.target!.state === "activated") {
+          onComplete();
+        }
+      },
+      { once: true }
+    );
+
+    waiting.postMessage({ type: "SKIP_WAITING" });
+  }
+}
