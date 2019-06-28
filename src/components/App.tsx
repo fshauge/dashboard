@@ -1,30 +1,37 @@
-import React, { FC, useEffect, useState } from "react";
-import * as serviceWorker from "../serviceWorker";
-import Main from "./Main";
+import React, { FC } from "react";
+import { ThemeProvider } from "styled-components";
+import useColorScheme from "../hooks/useColorScheme";
+import useServiceWorker from "../hooks/useServiceWorker";
+import themes from "../themes";
+import Dashboard from "./Dashboard";
+import GlobalStyle from "./GlobalStyle";
+import SafeArea from "./SafeArea";
+import StatusBarHighlight from "./StatusBarHighlight";
+import ThemeColor from "./ThemeColor";
+import Toast from "./Toast";
 
 const App: FC = () => {
-  const [waiting, setWaiting] = useState<ServiceWorker | null>(null);
-  const updated = waiting !== null;
+  const [waiting, skipWaiting] = useServiceWorker();
+  const colorScheme = useColorScheme();
 
-  useEffect(() => {
-    serviceWorker.waiting().then(setWaiting);
-
-    serviceWorker.register({
-      onUpdate: registration => {
-        setWaiting(registration.waiting!);
-      }
-    });
-  }, []);
-
-  const handleClick = () => {
-    serviceWorker.skipWaiting(waiting, () => {
-      window.location.reload();
-    });
-
-    setWaiting(null);
-  };
-
-  return <Main showToast={updated} onToastClick={handleClick} />;
+  return (
+    <ThemeProvider theme={themes[colorScheme]}>
+      <>
+        <GlobalStyle />
+        <ThemeColor />
+        <StatusBarHighlight />
+        <Toast
+          show={waiting}
+          onClick={skipWaiting}
+          title="Dashboard has been updated"
+          description="Press to reload"
+        />
+        <SafeArea>
+          <Dashboard />
+        </SafeArea>
+      </>
+    </ThemeProvider>
+  );
 };
 
 export default App;
