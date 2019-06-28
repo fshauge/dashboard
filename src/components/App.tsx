@@ -1,40 +1,19 @@
-import React, { FC } from "react";
-import styled, { ThemeProvider } from "styled-components";
-import useColorScheme from "../hooks/useColorScheme";
-import themes from "../themes";
-import Dashboard from "./Dashboard";
-import GlobalStyle from "./GlobalStyle";
-import StatusBarHighlight from "./StatusBarHighlight";
-import ThemeColor from "./ThemeColor";
-import Toast from "./Toast";
-
-const SafeArea = styled.div`
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-bottom);
-  padding-left: env(safe-area-inset-left);
-  padding-right: env(safe-area-inset-right);
-`;
+import React, { FC, useEffect, useState } from "react";
+import { register } from "../serviceWorker";
+import Main from "./Main";
 
 const App: FC = () => {
-  const colorScheme = useColorScheme();
+  const [updated, setUpdated] = useState(false);
 
-  return (
-    <ThemeProvider theme={themes[colorScheme]}>
-      <>
-        <GlobalStyle />
-        <ThemeColor />
-        <StatusBarHighlight />
-        <Toast
-          show={false}
-          title="Dashboard has been updated"
-          description="Press to reload"
-        />
-        <SafeArea>
-          <Dashboard />
-        </SafeArea>
-      </>
-    </ThemeProvider>
-  );
+  useEffect(() => {
+    register({
+      onUpdate: () => {
+        setUpdated(true);
+      }
+    });
+  });
+
+  return <Main updated={updated} />;
 };
 
 export default App;
