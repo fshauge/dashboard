@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import Card from "./Card";
+import EnturModule from "./modules/EnturModule";
 
 const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   grid-auto-rows: min-content;
   flex-direction: column;
-  justify-items: center;
+  justify-items: stretch;
   padding: 1.5rem;
   gap: 1.5rem;
 
@@ -23,15 +23,7 @@ const Grid = styled.div`
 const Dashboard = () => {
   return (
     <Grid>
-      <Card>
-        <h2>Card</h2>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio
-          enim pariatur accusamus veniam exercitationem esse voluptas quisquam
-          nisi, rem fugit, numquam, velit dicta! Soluta impedit ex tempora nemo
-          maiores amet?
-        </p>
-      </Card>
+      <EnturModule />
     </Grid>
   );
 };
