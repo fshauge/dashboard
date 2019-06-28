@@ -8,7 +8,7 @@ import StatusBarHighlight from "./StatusBarHighlight";
 import ThemeColor from "./ThemeColor";
 import Toast from "./Toast";
 
-const Container = styled.div`
+const SafeArea = styled.div`
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
   padding-left: env(safe-area-inset-left);
@@ -23,15 +23,15 @@ const App: FC = () => {
       <>
         <GlobalStyle />
         <ThemeColor />
-        <Container>
-          <StatusBarHighlight />
-          <Toast
-            show={false}
-            title="Dashboard has been updated"
-            description="Press to reload"
-          />
+        <StatusBarHighlight />
+        <Toast
+          show={false}
+          title="Dashboard has been updated"
+          description="Press to reload"
+        />
+        <SafeArea>
           <Dashboard />
-        </Container>
+        </SafeArea>
       </>
     </ThemeProvider>
   );
