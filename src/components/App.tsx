@@ -14,7 +14,6 @@ const App: FC = () => {
   });
 
   const handleClick = () => {
-    setUpdated(false);
     navigator.serviceWorker.controller!.postMessage({ type: "SKIP_WAITING" });
     window.location.reload();
   };
