@@ -32,51 +32,6 @@ const Dashboard = () => {
           maiores amet?
         </p>
       </Card>
-      <Card>
-        <h2>Card</h2>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio
-          enim pariatur accusamus veniam exercitationem esse voluptas quisquam
-          nisi, rem fugit, numquam, velit dicta! Soluta impedit ex tempora nemo
-          maiores amet?
-        </p>
-      </Card>
-      <Card>
-        <h2>Card</h2>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio
-          enim pariatur accusamus veniam exercitationem esse voluptas quisquam
-          nisi, rem fugit, numquam, velit dicta! Soluta impedit ex tempora nemo
-          maiores amet?
-        </p>
-      </Card>
-      <Card>
-        <h2>Card</h2>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio
-          enim pariatur accusamus veniam exercitationem esse voluptas quisquam
-          nisi, rem fugit, numquam, velit dicta! Soluta impedit ex tempora nemo
-          maiores amet?
-        </p>
-      </Card>
-      <Card>
-        <h2>Card</h2>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio
-          enim pariatur accusamus veniam exercitationem esse voluptas quisquam
-          nisi, rem fugit, numquam, velit dicta! Soluta impedit ex tempora nemo
-          maiores amet?
-        </p>
-      </Card>
-      <Card>
-        <h2>Card</h2>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio
-          enim pariatur accusamus veniam exercitationem esse voluptas quisquam
-          nisi, rem fugit, numquam, velit dicta! Soluta impedit ex tempora nemo
-          maiores amet?
-        </p>
-      </Card>
     </Grid>
   );
 };
