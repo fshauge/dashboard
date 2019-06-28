@@ -7,8 +7,7 @@ const App: FC = () => {
 
   useEffect(() => {
     register({
-      onUpdate: registration => {
-        console.log(registration);
+      onUpdate: () => {
         setUpdated(true);
       }
     });
