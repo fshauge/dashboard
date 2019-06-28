@@ -9,7 +9,6 @@ const App: FC = () => {
   useEffect(() => {
     register({
       onUpdate: registration => {
-        setUpdated(true);
         const waitingServiceWorker = registration.waiting!;
 
         skipWaitingRef.current = () => {
@@ -21,6 +20,8 @@ const App: FC = () => {
             window.location.reload();
           }
         });
+
+        setUpdated(true);
       }
     });
   });
