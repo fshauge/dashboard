@@ -1,38 +1,33 @@
-import React, { FC, useEffect, useRef, useState } from "react";
-import { register } from "../serviceWorker";
+import React, { FC, useEffect, useState } from "react";
+import * as serviceWorker from "../serviceWorker";
 import Main from "./Main";
 
 const App: FC = () => {
-  const [updated, setUpdated] = useState(false);
-  const skipWaitingRef = useRef<VoidFunction>();
+  const [waiting, setWaiting] = useState<ServiceWorker | null>(null);
+  const updated = waiting !== null;
 
   useEffect(() => {
-    register({
+    serviceWorker.waiting().then(setWaiting);
+  }, []);
+
+  useEffect(() => {
+    serviceWorker.register({
       onUpdate: registration => {
-        const waitingServiceWorker = registration.waiting!;
+        const waiting = registration.waiting!;
 
-        skipWaitingRef.current = () => {
-          waitingServiceWorker.postMessage({ type: "SKIP_WAITING" });
-        };
-
-        waitingServiceWorker.addEventListener("statechange", (event: any) => {
+        waiting.addEventListener("statechange", (event: any) => {
           if (event.target!.state === "activated") {
             window.location.reload();
           }
         });
 
-        setUpdated(true);
+        setWaiting(waiting);
       }
     });
-  });
+  }, [waiting]);
 
   const handleClick = () => {
-    setUpdated(false);
-
-    if (skipWaitingRef.current) {
-      skipWaitingRef.current();
-      window.location.reload();
-    }
+    setWaiting(null);
   };
 
   return <Main showToast={updated} onToastClick={handleClick} />;

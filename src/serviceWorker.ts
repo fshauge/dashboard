@@ -141,3 +141,15 @@ export function unregister() {
     });
   }
 }
+
+export function waiting(): Promise<ServiceWorker | null> {
+  return new Promise(resolve => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.ready.then(registration => {
+        resolve(registration.waiting);
+      });
+    } else {
+      resolve(null);
+    }
+  });
+}
