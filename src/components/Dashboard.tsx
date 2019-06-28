@@ -1,10 +1,28 @@
 import React from "react";
-import Card from "../Card";
-import styles from "./styles.module.scss";
+import styled from "styled-components";
+import Card from "./Card";
+
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: min-content;
+  flex-direction: column;
+  justify-items: center;
+  padding: 1.5rem;
+  gap: 1.5rem;
+
+  @media screen and (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (min-width: 1366px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+`;
 
 const Dashboard = () => {
   return (
-    <div className={styles.grid}>
+    <Grid>
       <Card>
         <h2>Card</h2>
         <p>
@@ -59,7 +77,7 @@ const Dashboard = () => {
           maiores amet?
         </p>
       </Card>
-    </div>
+    </Grid>
   );
 };
 
