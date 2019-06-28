@@ -2,27 +2,30 @@ import { useEffect, useState } from "react";
 import * as serviceWorker from "../serviceWorker";
 
 const useServiceWorker: () => [boolean, VoidFunction] = () => {
-  const [waiting, setWaiting] = useState<ServiceWorker | null>(null);
+  const [
+    waitingServiceWorker,
+    setWaitingServiceWorker
+  ] = useState<ServiceWorker | null>(null);
 
   useEffect(() => {
-    serviceWorker.waiting().then(setWaiting);
+    serviceWorker.waiting().then(setWaitingServiceWorker);
 
     serviceWorker.register({
       onUpdate: registration => {
-        setWaiting(registration.waiting!);
+        setWaitingServiceWorker(registration.waiting!);
       }
     });
   }, []);
 
   const skipWaiting = () => {
-    serviceWorker.skipWaiting(waiting, () => {
+    serviceWorker.skipWaiting(waitingServiceWorker, () => {
       window.location.reload();
     });
 
-    setWaiting(null);
+    setWaitingServiceWorker(null);
   };
 
-  return [waiting !== null, skipWaiting];
+  return [waitingServiceWorker !== null, skipWaiting];
 };
 
 export default useServiceWorker;
