@@ -262,6 +262,7 @@ const DEPARTURES_QUERY = gql`
 
 const Departures: FC = () => {
   const { loading, data } = useQuery(DEPARTURES_QUERY, {
+    suspend: true,
     variables: {
       id: "NSR:StopPlace:58366",
       numberOfDeparturesPerLineAndDestinationDisplay: 1,

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, Suspense } from "react";
 import { ThemeProvider } from "styled-components";
 import useColorScheme from "../hooks/useColorScheme";
 import useServiceWorker from "../hooks/useServiceWorker";
@@ -6,6 +6,7 @@ import themes from "../themes";
 import Dashboard from "./Dashboard";
 import GlobalStyle from "./GlobalStyle";
 import SafeArea from "./SafeArea";
+import { Spinner } from "./Spinner";
 import StatusBarHighlight from "./StatusBarHighlight";
 import ThemeColor from "./ThemeColor";
 import Toast from "./Toast";
@@ -27,7 +28,9 @@ const App: FC = () => {
           description="Press to reload"
         />
         <SafeArea>
-          <Dashboard />
+          <Suspense fallback={<Spinner />}>
+            <Dashboard />
+          </Suspense>
         </SafeArea>
       </>
     </ThemeProvider>
