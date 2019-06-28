@@ -5,6 +5,7 @@ import useThemeProperty from "../../hooks/useThemeProperty";
 import { clampMap } from "../../number";
 import Dashboard from "../Dashboard";
 import StatusBarHighlight from "../StatusBarHighlight";
+import Toast from "../Toast";
 import styles from "./styles.module.scss";
 
 const useStatusBarHighlightOpacity = () => {
@@ -25,6 +26,11 @@ const App = () => {
       </Helmet>
       <div className={styles.container}>
         <StatusBarHighlight opacity={opacity} />
+        <Toast
+          show={false}
+          title="Dashboard has been updated"
+          description="Press to reload"
+        />
         <Dashboard />
       </div>
     </>
