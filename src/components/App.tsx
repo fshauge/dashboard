@@ -27,8 +27,12 @@ const App: FC = () => {
   });
 
   const handleClick = () => {
-    skipWaitingRef.current!();
-    window.location.reload();
+    setUpdated(false);
+
+    if (skipWaitingRef.current) {
+      skipWaitingRef.current();
+      window.location.reload();
+    }
   };
 
   return <Main showToast={updated} onToastClick={handleClick} />;
