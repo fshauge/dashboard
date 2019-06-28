@@ -8,26 +8,26 @@ const App: FC = () => {
 
   useEffect(() => {
     serviceWorker.waiting().then(setWaiting);
-  }, []);
 
-  useEffect(() => {
     serviceWorker.register({
       onUpdate: registration => {
-        const waiting = registration.waiting!;
-
-        waiting.addEventListener("statechange", (event: any) => {
-          if (event.target!.state === "activated") {
-            window.location.reload();
-          }
-        });
-
-        setWaiting(waiting);
+        setWaiting(registration.waiting!);
       }
     });
-  }, [waiting]);
+  }, []);
 
   const handleClick = () => {
-    setWaiting(null);
+    if (waiting !== null) {
+      waiting.addEventListener("statechange", (event: any) => {
+        if (event.target!.state === "activated") {
+          window.location.reload();
+        }
+      });
+
+      waiting.postMessage({ type: "SKIP_WAITING" });
+
+      setWaiting(null);
+    }
   };
 
   return <Main showToast={updated} onToastClick={handleClick} />;
