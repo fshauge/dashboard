@@ -1,25 +1,9 @@
-import React from "react";
-import useScroll from "../../hooks/useScroll";
-import useThemeProperty from "../../hooks/useThemeProperty";
+import React, { FC } from "react";
 import styles from "./styles.module.scss";
 
-const clamp = (value: number, min: number, max: number) =>
-  Math.max(0, Math.min(1, value));
+type Props = { opacity: number };
 
-const map = (
-  value: number,
-  min1: number,
-  max1: number,
-  min2: number,
-  max2: number
-) => min2 + ((value - min1) * (max2 - min2)) / (max1 - min1);
-
-const StatusBarHighlight = () => {
-  const scroll = useScroll();
-  const start = parseFloat(useThemeProperty("status-bar-highlight-start"));
-  const end = parseFloat(useThemeProperty("status-bar-highlight-end"));
-  const opacity = map(clamp(scroll / 100, 0, 1), 0, 1, start, end);
-
+const StatusBarHighlight: FC<Props> = ({ opacity }) => {
   return <div style={{ opacity }} className={styles.container} />;
 };
 
