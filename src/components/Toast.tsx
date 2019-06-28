@@ -7,10 +7,11 @@ const Container = styled.div<{ show: boolean }>`
   bottom: 0;
   left: 0;
   width: 100%;
-  transition: transform 0.35s ease-in-out;
   background: ${props => props.theme.box.background};
   box-shadow: ${props => props.theme.box.shadow};
+  transition: all 0.35s ease-in-out;
   transform: ${props => (props.show ? "translateY(0)" : "translateY(100%)")};
+  opacity: ${props => (props.show ? "1" : "0")};
 `;
 
 const Box = styled.div`
