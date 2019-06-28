@@ -12,7 +12,7 @@ const useStatusBarHighlightOpacity = () => {
   const scroll = useScroll();
   const start = parseFloat(useThemeProperty("status-bar-highlight-start"));
   const end = parseFloat(useThemeProperty("status-bar-highlight-end"));
-  return clampMap(scroll / 100, 0, 1, start, end);
+  return clampMap(scroll, 0, 100, start, end);
 };
 
 const App = () => {
