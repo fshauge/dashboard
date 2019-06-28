@@ -1,19 +1,29 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import { register } from "../serviceWorker";
 import Main from "./Main";
 
 const App: FC = () => {
   const [updated, setUpdated] = useState(false);
+  const skipWaitingRef = useRef<VoidFunction>();
 
   useEffect(() => {
     register({
-      onUpdate: () => {
+      onUpdate: registration => {
         setUpdated(true);
+        skipWaitingRef.current = () => {
+          registration.installing!.postMessage({ type: "SKIP_WAITING" });
+        };
       }
     });
   });
 
-  return <Main updated={updated} />;
+  const handleClick = () => {
+    setUpdated(false);
+    skipWaitingRef.current!();
+    location.reload();
+  };
+
+  return <Main showToast={updated} onToastClick={handleClick} />;
 };
 
 export default App;

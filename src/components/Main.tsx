@@ -9,7 +9,10 @@ import StatusBarHighlight from "./StatusBarHighlight";
 import ThemeColor from "./ThemeColor";
 import Toast from "./Toast";
 
-const Main: FC<{ updated: boolean }> = ({ updated }) => {
+const Main: FC<{ showToast: boolean; onToastClick: () => void }> = ({
+  showToast,
+  onToastClick
+}) => {
   const colorScheme = useColorScheme();
 
   return (
@@ -19,7 +22,8 @@ const Main: FC<{ updated: boolean }> = ({ updated }) => {
         <ThemeColor />
         <StatusBarHighlight />
         <Toast
-          show={updated}
+          show={showToast}
+          onClick={onToastClick}
           title="Dashboard has been updated"
           description="Press to reload"
         />

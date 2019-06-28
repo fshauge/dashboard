@@ -32,13 +32,14 @@ const Description = styled.p`
   color: ${props => props.theme.text.secondary};
 `;
 
-const Toast: FC<{ show: boolean; title: string; description: string }> = ({
-  show,
-  title,
-  description
-}) => {
+const Toast: FC<{
+  show: boolean;
+  onClick: () => void;
+  title: string;
+  description: string;
+}> = ({ show, onClick, title, description }) => {
   return (
-    <Container show={show}>
+    <Container show={show} onClick={onClick}>
       <Box>
         <Title>{title}</Title>
         <Description>{description}</Description>
