@@ -4,22 +4,20 @@ import Main from "./Main";
 
 const App: FC = () => {
   const [updated, setUpdated] = useState(false);
-  const skipWaitingRef = useRef<VoidFunction>();
+  const serviceWorkerRef = useRef<ServiceWorker>();
 
   useEffect(() => {
     register({
       onUpdate: registration => {
         setUpdated(true);
-        skipWaitingRef.current = () => {
-          registration.installing!.postMessage({ type: "SKIP_WAITING" });
-        };
+        serviceWorkerRef.current = registration.installing!;
       }
     });
   });
 
   const handleClick = () => {
     setUpdated(false);
-    skipWaitingRef.current!();
+    serviceWorkerRef.current!.postMessage({ type: "SKIP_WAITING" });
     window.location.reload();
   };
 
