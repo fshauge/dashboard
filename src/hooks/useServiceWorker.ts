@@ -18,10 +18,8 @@ const useServiceWorker: () => [boolean, VoidFunction] = () => {
   }, []);
 
   const skipWaiting = () => {
-    serviceWorker.skipWaiting(waitingServiceWorker, () => {
-      window.location.reload();
-    });
-
+    serviceWorker.skipWaiting(waitingServiceWorker);
+    window.location.reload();
     setWaitingServiceWorker(null);
   };
 
