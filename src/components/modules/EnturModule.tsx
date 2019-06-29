@@ -261,7 +261,7 @@ const DEPARTURES_QUERY = gql`
 `;
 
 const Departures: FC = () => {
-  const { loading, data } = useQuery(DEPARTURES_QUERY, {
+  const { data } = useQuery(DEPARTURES_QUERY, {
     suspend: true,
     variables: {
       id: "NSR:StopPlace:58366",
@@ -270,10 +270,6 @@ const Departures: FC = () => {
       numberOfSubsequentEstimatedCalls: 6
     }
   });
-
-  if (loading) {
-    return null;
-  }
 
   const lines = data.stopPlace.quays
     .flatMap((quay: any) => quay.estimatedCalls)
