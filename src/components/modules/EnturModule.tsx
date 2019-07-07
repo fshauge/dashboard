@@ -1,4 +1,5 @@
 import ApolloClient, { gql } from "apollo-boost";
+import moment from "moment";
 import React, { FC } from "react";
 import { ApolloProvider, useQuery } from "react-apollo-hooks";
 import Card from "../Card";
@@ -8,11 +9,12 @@ const client = new ApolloClient({
 });
 
 const DEPARTURES_QUERY = gql`
-  query($id: String!) {
+  query($id: String!, $timeRange: Int) {
     stopPlace(id: $id) {
       id
       name
-      estimatedCalls(numberOfDepartures: 500) {
+
+      estimatedCalls(timeRange: $timeRange, numberOfDepartures: 500) {
         expectedDepartureTime
 
         destinationDisplay {
@@ -42,7 +44,8 @@ const Departures: FC = () => {
   const { data } = useQuery(DEPARTURES_QUERY, {
     suspend: true,
     variables: {
-      id: "NSR:StopPlace:58366"
+      id: "NSR:StopPlace:58366",
+      timeRange: 1 * 60 * 60
     }
   });
 
@@ -50,16 +53,21 @@ const Departures: FC = () => {
     <>
       <h2>{data.stopPlace.name}</h2>
       <ul>
-        {data.stopPlace.estimatedCalls.map((estimatedCall: any) => {
-          const destinationDisplay = estimatedCall.destinationDisplay;
-          const line = estimatedCall.serviceJourney.journeyPattern.line;
+        {data.stopPlace.estimatedCalls.map(
+          (estimatedCall: any, index: number) => {
+            const destinationDisplay = estimatedCall.destinationDisplay;
+            const line = estimatedCall.serviceJourney.journeyPattern.line;
+            const relative = moment(estimatedCall.expectedDepartureTime)
+              .startOf("s")
+              .fromNow();
 
-          return (
-            <li key={`${line.id}-${destinationDisplay.frontText}`}>
-              {line.publicCode} {destinationDisplay.frontText}
-            </li>
-          );
-        })}
+            return (
+              <li key={index}>
+                {line.publicCode} {destinationDisplay.frontText} - {relative}
+              </li>
+            );
+          }
+        )}
       </ul>
     </>
   );
