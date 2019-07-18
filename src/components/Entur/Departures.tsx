@@ -26,7 +26,7 @@ const TitleBar = styled.div`
   align-items: center;
 `;
 
-const RefetchButton = styled.div`
+const RefetchButton = styled.h2`
   cursor: pointer;
 `;
 
