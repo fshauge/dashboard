@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import EnturModule from "./modules/EnturModule";
+import Entur from "./Entur";
 
 const Grid = styled.div`
   display: grid;
@@ -23,7 +23,7 @@ const Grid = styled.div`
 const Dashboard = () => {
   return (
     <Grid>
-      <EnturModule />
+      <Entur />
     </Grid>
   );
 };
