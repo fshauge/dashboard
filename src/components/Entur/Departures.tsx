@@ -20,6 +20,16 @@ const List = styled.ul`
   }
 `;
 
+const TitleBar = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const RefetchButton = styled.div`
+  cursor: pointer;
+`;
+
 export const DEPARTURES_QUERY = gql`
   query($id: String!, $timeRange: Int!, $numberOfDepartures: Int!) {
     stopPlace(id: $id) {
@@ -54,22 +64,28 @@ export const DEPARTURES_QUERY = gql`
 `;
 
 const Departures: FC<{ transport: string }> = ({ transport }) => {
+  const variables = {
+    id: "NSR:StopPlace:58366",
+    timeRange: 1 * 60 * 60,
+    numberOfDepartures: 20
+  };
+
   const {
     data: {
       stopPlace: { name, estimatedCalls }
-    }
+    },
+    refetch
   } = useQuery<any>(DEPARTURES_QUERY, {
     suspend: true,
-    variables: {
-      id: "NSR:StopPlace:58366",
-      timeRange: 1 * 60 * 60,
-      numberOfDepartures: 20
-    }
+    variables
   });
 
   return (
     <>
-      <h2>{name}</h2>
+      <TitleBar>
+        <h2>{name}</h2>
+        <RefetchButton onClick={() => refetch(variables)}>🔄</RefetchButton>
+      </TitleBar>
       <List>
         {estimatedCalls
           .filter(
