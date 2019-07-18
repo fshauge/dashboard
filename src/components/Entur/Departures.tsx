@@ -1,7 +1,24 @@
 import { gql } from "apollo-boost";
 import React, { FC } from "react";
 import { useQuery } from "react-apollo-hooks";
+import styled from "styled-components";
 import Departure from "./Departure";
+
+const List = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  & > li {
+    &:not(:first-child) {
+      margin-top: 0.25rem;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 0.25rem;
+    }
+  }
+`;
 
 export const DEPARTURES_QUERY = gql`
   query($id: String!, $timeRange: Int!, $numberOfDepartures: Int!) {
@@ -53,7 +70,7 @@ const Departures: FC<{ transport: string }> = ({ transport }) => {
   return (
     <>
       <h2>{name}</h2>
-      <ul>
+      <List>
         {estimatedCalls
           .filter(
             ({ serviceJourney: { transportSubmode } }: any) =>
@@ -65,7 +82,7 @@ const Departures: FC<{ transport: string }> = ({ transport }) => {
               <Departure estimatedCall={estimatedCall} />
             </li>
           ))}
-      </ul>
+      </List>
     </>
   );
 };
