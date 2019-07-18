@@ -36,7 +36,7 @@ export const DEPARTURES_QUERY = gql`
   }
 `;
 
-const Departures: FC<{ transport?: string }> = ({ transport }) => {
+const Departures: FC<{ transport: string }> = ({ transport }) => {
   const {
     data: {
       stopPlace: { name, estimatedCalls }
