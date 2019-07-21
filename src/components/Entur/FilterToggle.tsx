@@ -24,23 +24,25 @@ const FilterToggle: FC<{
 }> = ({ values, onChange }) => {
   return (
     <Container>
-      {Object.entries(values).map(([key, { id, active }]) => {
-        const handleClick = () => {
-          onChange({
-            ...values,
-            [key]: {
-              id,
-              active: !active
-            }
-          });
-        };
+      {Object.entries(values)
+        .sort(([, { id: a }], [, { id: b }]) => a - b)
+        .map(([key, { id, active }]) => {
+          const handleClick = () => {
+            onChange({
+              ...values,
+              [key]: {
+                id,
+                active: !active
+              }
+            });
+          };
 
-        return (
-          <Element key={id} active={active} onClick={handleClick}>
-            {key}
-          </Element>
-        );
-      })}
+          return (
+            <Element key={id} active={active} onClick={handleClick}>
+              {key}
+            </Element>
+          );
+        })}
     </Container>
   );
 };
