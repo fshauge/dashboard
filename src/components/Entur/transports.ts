@@ -113,4 +113,4 @@ const transports = {
   allHireVehicles: "?"
 };
 
-export default transports;
+export default transports as any;

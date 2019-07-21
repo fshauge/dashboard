@@ -3,6 +3,8 @@ import React, { FC } from "react";
 import { useQuery } from "react-apollo-hooks";
 import styled from "styled-components";
 import Departure from "./Departure";
+import Filters from "./Filters";
+import transports from "./transports";
 
 const List = styled.ul`
   list-style: none;
@@ -63,7 +65,7 @@ export const DEPARTURES_QUERY = gql`
   }
 `;
 
-const Departures: FC<{ transport: string }> = ({ transport }) => {
+const Departures: FC<{ filters: Filters }> = ({ filters }) => {
   const variables = {
     id: "NSR:StopPlace:58366",
     timeRange: 1 * 60 * 60,
@@ -88,13 +90,16 @@ const Departures: FC<{ transport: string }> = ({ transport }) => {
       </TitleBar>
       <List>
         {estimatedCalls
+          .map((estimatedCall: any, index: number) => ({
+            ...estimatedCall,
+            id: index
+          }))
           .filter(
             ({ serviceJourney: { transportSubmode } }: any) =>
-              // Implication P => Q is equal to !P \/ Q
-              !transport || transportSubmode === transport
+              filters[transports[transportSubmode]]
           )
-          .map((estimatedCall: any, index: number) => (
-            <li key={index}>
+          .map((estimatedCall: any) => (
+            <li key={estimatedCall.id}>
               <Departure estimatedCall={estimatedCall} />
             </li>
           ))}
