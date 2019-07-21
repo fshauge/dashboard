@@ -18,22 +18,25 @@ const Element = styled.div<{ active: boolean }>`
   padding: 0.25rem;
 `;
 
-const FiltersToggle: FC<{
+const FilterToggle: FC<{
   values: Filters;
   onChange: (values: Filters) => void;
 }> = ({ values, onChange }) => {
   return (
     <Container>
-      {Object.entries(values).map(([key, value]) => {
+      {Object.entries(values).map(([key, { id, active }]) => {
         const handleClick = () => {
           onChange({
             ...values,
-            [key]: !value
+            [key]: {
+              id,
+              active: !active
+            }
           });
         };
 
         return (
-          <Element key={key} active={value} onClick={handleClick}>
+          <Element key={id} active={active} onClick={handleClick}>
             {key}
           </Element>
         );
@@ -42,4 +45,4 @@ const FiltersToggle: FC<{
   );
 };
 
-export default FiltersToggle;
+export default FilterToggle;

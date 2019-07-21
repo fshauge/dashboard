@@ -1,5 +1,5 @@
 type Filters = {
-  [key: string]: boolean;
+  [key: string]: { id: number; active: boolean };
 };
 
 export default Filters;

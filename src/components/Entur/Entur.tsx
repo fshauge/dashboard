@@ -4,7 +4,7 @@ import { ApolloProvider } from "react-apollo-hooks";
 import Card from "../Card";
 import Departures from "./Departures";
 import Filters from "./Filters";
-import FiltersToggle from "./TransportsToggle";
+import FilterToggle from "./FilterToggle";
 
 const client = new ApolloClient({
   uri: "https://api.entur.io/journey-planner/v2/graphql"
@@ -12,15 +12,15 @@ const client = new ApolloClient({
 
 const Entur: FC = () => {
   const [filters, setFilters] = useState<Filters>({
-    "🚌": true,
-    "🚋": true,
-    "🚇": true
+    "🚌": { id: 0, active: true },
+    "🚋": { id: 1, active: true },
+    "🚇": { id: 2, active: true }
   });
 
   return (
     <ApolloProvider client={client}>
       <Card>
-        <FiltersToggle values={filters} onChange={setFilters} />
+        <FilterToggle values={filters} onChange={setFilters} />
         <Departures filters={filters} />
       </Card>
     </ApolloProvider>
