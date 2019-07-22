@@ -94,10 +94,10 @@ const Departures: FC<{ filters: Filters }> = ({ filters }) => {
             ...estimatedCall,
             id: index
           }))
-          .filter(
-            ({ serviceJourney: { transportSubmode } }: any) =>
-              filters[transports[transportSubmode]].active
-          )
+          .filter(({ serviceJourney: { transportSubmode } }: any) => {
+            const filter = filters[transports[transportSubmode]];
+            return !filter || filter.active;
+          })
           .map((estimatedCall: any) => (
             <li key={estimatedCall.id}>
               <Departure estimatedCall={estimatedCall} />
