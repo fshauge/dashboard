@@ -5,7 +5,7 @@ import Filters from "./Filters";
 const Container = styled.div`
   display: flex;
   border-radius: 0.5rem;
-  background: #191919;
+  background: ${props => props.theme.filterToggle.background};
   overflow: hidden;
 `;
 
@@ -14,7 +14,8 @@ const Element = styled.div<{ active: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: ${props => (props.active ? "#121212" : "transparent")};
+  background: ${props =>
+    props.active ? props.theme.filterToggle.backgroundActive : "transparent"};
   padding: 0.25rem;
 `;
 

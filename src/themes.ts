@@ -19,6 +19,11 @@ export type Theme = {
     background: string;
     shadow: string;
   };
+
+  filterToggle: {
+    background: string;
+    backgroundActive: string;
+  };
 };
 
 const themes: ThemeMap = {
@@ -38,6 +43,11 @@ const themes: ThemeMap = {
     box: {
       background: "#f8f8f8",
       shadow: "0 0 0.5rem hsla(0, 0%, 0%, 0.05)"
+    },
+
+    filterToggle: {
+      background: "#eee",
+      backgroundActive: "#e0e0e0"
     }
   },
 
@@ -57,6 +67,11 @@ const themes: ThemeMap = {
     box: {
       background: "#222",
       shadow: "0 0 0.5rem hsla(0, 0%, 0%, 0.25)"
+    },
+
+    filterToggle: {
+      background: "#191919",
+      backgroundActive: "#121212"
     }
   }
 };
